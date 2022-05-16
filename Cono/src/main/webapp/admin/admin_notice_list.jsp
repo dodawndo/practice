@@ -45,7 +45,8 @@
 			<c:forEach var = "notice" items = "${noticeList}">
 					<tr><td>${notice.getNotice_idx() }</td>
 					<td id="subject">
-						<a href="admin_notice_view.admin?notice_idx=${notice.getNotice_idx() }&page=${pageNum}">${board.getBoard_subject() } </a></td><td>코노관리자</td><td>2022-05-11</td></tr>
+						<a href="admin_notice_view.admin?notice_idx=${notice.getNotice_idx() }&page=${pageNum}">${board.getBoard_subject() } </a></td>
+						<td>${notice.getAdmin_id() }</td><td>${notice.getNotice_date() }</td></tr>
 					<tr><td> 1 <td> 코노협회에서는~~~</td><td>코노관리자</td><td>2022-05-11</td></tr>
 					<tr><td> 1 <td> 코노협회에서는~~~</td><td>코노관리자</td><td>2022-05-11</td></tr>
 					<tr><td> 1 <td> 코노협회에서는~~~</td><td>코노관리자</td><td>2022-05-11</td></tr>
@@ -54,10 +55,51 @@
 				</c:if>
 			</table>
 			<div id="table_search">
-				<input type="button" value="글쓰기" class="btn" onclick="location.href='admin_notice_write.jsp'">
+				<input type="button" value="글쓰기" class="btn" onclick="location.href='AdminWriteForm.admin'">
 				
 			</div>
 			</article>
+			<section id="pageList">
+	<!-- 
+		현재 페이지 번호(pageNum)가 1보다 클 경우에만 Prev 링크 동작
+		=> 클릭 시 notice.jsp 로 이동하면서 
+		   현재 페이지 번호(pageNum) - 1 값을 page 파라미터로 전달
+		-->
+		<c:choose>
+			<c:when test="${pageNum > 1 }">
+				<input type ="button" value ="이전" onclick="location.href='AdminNoticeList.admin?page=${pageNum - 1}'">
+			</c:when>
+			<c:otherwise>
+		
+				<input type ="button" value ="이전">
+			</c:otherwise>
+		</c:choose>
+		<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
+		<c:forEach var ="i" begin="${startPage }" end="${endPage }" > <!-- step="" 은 1씩 증가해서 생략 -->
+		<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->	
+			<c:choose>
+			<c:when test="${pageNum eq i }">
+				${i }
+			</c:when>
+			<c:otherwise>
+		
+				<a href ="AdminNoticeList.admin?page=${i }">${i }</a>
+			</c:otherwise>
+		</c:choose>
+		</c:forEach>
+	<!-- 
+		현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 다음 링크 동작
+		-->
+		<c:choose>
+			<c:when test="${pageNum < maxPage}">
+				<input type ="button" value ="다음" onclick="location.href='AdminNoticeList.admin?page=${pageNum + 1}'">
+			</c:when>
+			<c:otherwise>
+		
+				<input type ="button" value ="다음">&nbsp;
+			</c:otherwise>
+		</c:choose>
+	</section>
 			<div id="table_search">
 				<form action="admin_notice_search.jsp" method="get">
 					<select name="searchType">

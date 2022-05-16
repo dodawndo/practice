@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.AdminNoticeListAction;
+import action.AdminWriteProAction;
 import vo.ActionForward;
 
 @WebServlet("*.admin")
@@ -29,7 +31,6 @@ public class AdminFrontController extends HttpServlet {
 		ActionForward forward = null;
 		
 		if(command.equals("/AdminNoticeList.admin")) {
-			// 비즈니스 로직 처리를 위해 BoardListAction 클래스의 execute() 메서드 호출
 			action = new AdminNoticeListAction();
 			
 			try {
@@ -37,9 +38,22 @@ public class AdminFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+		} else if(command.equals("/AdminWriteForm.admin")) {
+			forward = new ActionForward();
+			forward.setPath("./admin/admin_notice_write.jsp");
+			forward.setRedirect(false); // Dispatcher 방식(생략 가능)
+			
+		} else if(command.equals("/AdminWritePro.admin")) {
+			action = new AdminWriteProAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+		
 		} 
-		
-		
 		
 		//==============================================================================================
 		

@@ -120,5 +120,55 @@ public class AdminDAO {
 			
 			return noticeList;
 		}
+	
+	//---------------------------------------------------------------
+	// 관리자 공지사항 글쓰기 
+
+	public int insertArticle(AdminNoticeDTO adminNoticeDTO) {
+		System.out.println("AdminDAO - insertArticle()");
+		
+		// INSERT 작업 결과를 리턴받아 저장할 변수 선언
+		int insertCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int num = 1; // 새 글 번호를 저장할 변수 
+		
+		try {
+			String sql = "SELECT MAX(notice_idx) FROM notice";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				// 조회된 레코드 중 Auto_increment 컬럼 값을 num 에 저장
+				num = rs.getInt(1) + 1;
+			}
+			
+			close(pstmt);
+			
+			// 전달받은 데이터(BoardDTO 객체)를 사용하여 board 테이블 INSERT 작업 수행
+			sql = "INSERT INTO notice VALUES (?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, adminNoticeDTO.getNotice_idx());
+			pstmt.setString(2, adminNoticeDTO.getAdmin_id());
+			pstmt.setString(3, adminNoticeDTO.getNotice_subject());
+			pstmt.setString(4, adminNoticeDTO.getNotice_content());
+			pstmt.setString(5, adminNoticeDTO.getNotice_date());
+			
+			insertCount = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - insertArticle()");
+			e.printStackTrace();
+		} finally {
+			// DB 자원 반환(주의! Connection 객체 반환 금지!)
+			close(pstmt);
+			close(rs);
+		}
+		
+		// INSERT 작업 결과 리턴
+		return insertCount;
+	}
 
 }

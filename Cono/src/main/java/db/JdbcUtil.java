@@ -70,6 +70,25 @@ public class JdbcUtil {
 		}
 	}
 	
+	// 3. 트랜잭션 처리에 필요한 commit, rollback 작업을 수행하기 위한 메서드 정의
+		// => 단, Connection 객체에 대해 Auto Commit 기능 해제 필수
+		// => 파라미터 : Connection 객체(con)
+		public static void commit(Connection con) {
+			try {
+				con.commit();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		public static void rollback(Connection con) {
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	
 }
 
 
