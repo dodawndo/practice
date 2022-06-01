@@ -13,7 +13,7 @@ report_date
 
 
 CREATE TABLE report (
-	report_idx varchar(20),
+	report_idx varchar(20) primary key,
 	member_id varchar(20),
 	report_type varchar(20),
 	report_subject varchar(50),
