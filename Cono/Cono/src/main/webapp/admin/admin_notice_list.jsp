@@ -79,18 +79,18 @@ a {
   }  
 
 
-  .paging input{ 
+  .paging input:not(.btn){ 
     width: 30px;  
    	height: 30px;   
    	background-repeat:no-repeat; 
    	border-radius:100px;  
    	border-style: none;  
     overflow: hidden;   
-    
-  	
+    font-size: 13px;
+    font-weight: bold;
   } 
   
-  .paging input:hover{
+  .paging input:not(.btn):hover{
   	background-color: #999;
   } 
   
@@ -101,33 +101,41 @@ a {
 /* 검색 창 */
 
 
-.search {
+.ssearch {
  	position:relative; 
  	float: right; 
  	margin-right: 50px; 
  	margin-top: 4px; 
 }
 
+.hh{
+	position:relative; 
+ 	float: left; 
+ 	margin-left: 90px; 
+ 	margin-top: 4px;
+	color:#17191d;
+ 	
+}
 select {
 	width:65px;
 	height :30px;
 	font-size: 13px;
 	color:#999;
 	border:2px solid #bbb;
-	border-radius:25px;
+ 	border-radius:3px; 
 }
 
 
 input[type=text] { 
  	width:180px; 
  	border:1px solid #bbb; 
- 	border-radius: 14px; 
- 	padding: 10px 12px;  	
+ 	border-radius: 3px; 
+ 	padding: 8px 12px;  	
  	font-size: 14px; 
  } 
 #search_btn{
 	font-size: 13px;
- 	padding: 7px 7px; 
+ 	padding: 6px 7px; 
 	background-color: black;
 	color: white;
 	border : 2px solid black;
@@ -147,6 +155,18 @@ input[type=text] {
 	color:black;
 }
 
+.btn{
+ 	background-image: url(../images/2199097_edit_draw_pen_pencil_write_icon.png); 
+	background-size: cover;
+	float: right; 
+	width: 40px;  
+   	height: 40px;   
+   	background-repeat:no-repeat;
+   	border:0;
+   	border-style: none; 
+   	background-color: white;
+   	margin:-10px;
+}
 
 </style>
 
@@ -155,7 +175,10 @@ input[type=text] {
 <div>
 	<jsp:include page="../HeaderFooter/top.jsp" />
 </div>
-
+<!-- 헤더 -->
+   <div>
+      <jsp:include page="../admin_css/sidebar.jsp"/>
+   </div>
 
 <body>
 
@@ -164,18 +187,20 @@ input[type=text] {
 	<c:set var="startPage" value="${pageInfo.getStartPage() }" />
 	<c:set var="endPage" value="${pageInfo.getEndPage() }" />
 	<c:set var="listCount" value="${pageInfo.getListCount() }" />
-	<nav id="left_menu">
-		<ul>
-			<li><a href="AdminNoticeList.admin">Notice</a></li>
-			<li><a href="admin_product.jsp">product</a></li>
-			<li><a href="admin_member.jsp">member</a></li>
-			<li><a href="AdminQNAList.admin">qna</a></li>
-			<li><a href="AdminReportList.admin">report</a></li>
-		</ul>
-	</nav>
+<!-- 	<nav id="left_menu"> -->
+<!-- 		<ul> -->
+<!-- 			<li><a href="AdminNoticeList.admin">Notice</a></li> -->
+<!-- 			<li><a href="admin_product.jsp">product</a></li> -->
+<!-- 			<li><a href="admin_member.jsp">member</a></li> -->
+<!-- 			<li><a href="AdminQNAList.admin">qna</a></li> -->
+<!-- 			<li><a href="AdminReportList.admin">report</a></li> -->
+<!-- 		</ul> -->
+<!-- 	</nav> -->
 	<hr>
-	
+	<div class ="body">
 	<div class ="search">
+		<div class ="hh"><h1>NOTICE</h1></div>
+		<div class="ssearch">
 		<form action="AdminNoticeSearch.admin" method="get">
 			<select name="searchType">
 				<option value="subject">제목</option>
@@ -183,7 +208,7 @@ input[type=text] {
 			</select> 
 			<input type="text" name="search" placeholder="here" > 
 			<input type="submit" value="Search" id="search_btn" >
-		</form>
+		</form></div>
 	</div>
 		
 		
@@ -217,11 +242,11 @@ input[type=text] {
 	<div class ="paging">
 		<c:choose>
 			<c:when test="${pageNum > 1 }">
-				<input type="button" value=" < " onclick="location.href='AdminNoticeList.admin?page=${pageNum - 1}'">
+				<input type="button"  value=" < " onclick="location.href='AdminNoticeList.admin?page=${pageNum - 1}'">
 			</c:when>
 			<c:otherwise>
 
-				<input type="button" value=" < ">&nbsp;
+				<input type="button"  value=" < ">&nbsp;
 			</c:otherwise>
 		</c:choose>
 		
@@ -237,19 +262,17 @@ input[type=text] {
 		</c:forEach>
 	<c:choose>
 			<c:when test="${pageNum < maxPage}">
-				<input type="button" value=" > "  onclick="location.href='AdminNoticeList.admin?page=${pageNum + 1}'">
+				<input type="button"  value=" > "  onclick="location.href='AdminNoticeList.admin?page=${pageNum + 1}'">
 			</c:when>
 			<c:otherwise>
-				<input type="button" value=" > " >&nbsp;
+				<input type="button"  value=" > " >&nbsp;
 			</c:otherwise>
 		</c:choose>
+		<input type="button" class="btn" onclick="location.href='AdminWriteForm.admin'" >
 		</div>
+		</div>  <!-- 리스트탭 디브 -->
 	
-	
-		<div class ="writer">
-			<input type="button" value="글쓰기" class="btn" onclick="location.href='AdminWriteForm.admin'" > <i class="fa-thin fa-pen-line"></i>
-		</div>
-	</div>	
+</div>
 	<hr>
 
 	<div>

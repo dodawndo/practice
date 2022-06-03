@@ -250,4 +250,9 @@ public class ItemDAO {
 			return updateCount;
 		}
 
+		public ArrayList<ImgDTO> selectImgList(String item_idx) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 }
