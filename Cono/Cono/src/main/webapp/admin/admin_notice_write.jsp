@@ -19,7 +19,7 @@ a {
  #btn{
  	font-size: 13px;
  	font-weight:bold;
- 	padding: 6px 7px; 
+ 	padding: 10px 40px; 
 	background-color: white;
 	color: #9fa1a7;
 	border : 2px solid #9fa1a7;
@@ -42,7 +42,7 @@ a {
 .hh{
 	position:relative; 
  	float: center; 
- 	margin-left: 60px; 
+ 	margin-lefCt: 60px; 
  	margin-top: 4px;
  	margin-bottom: 10px;
 	color:#17191d;;
@@ -54,6 +54,11 @@ a {
  	text-align: center;
  } 
 
+.buttonArea{
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 25px;
+}
 #textBox {
 	width: 300px;
 	height: 30px;
@@ -74,6 +79,7 @@ a {
  	text-align: center; 
 	padding-top: 15px;
 }
+
 </style>
 
 
@@ -103,7 +109,7 @@ a {
 			
 
 			
-				<input type="submit" value="글쓰기" id="btn" >
+				<div class = "buttonArea"><input type="submit" value="글쓰기" id="btn" ></div>
 			
 		</form></div>
 		</div>
