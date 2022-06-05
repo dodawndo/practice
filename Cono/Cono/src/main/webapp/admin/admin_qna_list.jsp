@@ -2,21 +2,185 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-// AdminQNADTO qna = (AdminQNADTO)request.getAttribute("qna");
-%>
 <!DOCTYPE html>
 <html>
 <head>
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
 <meta charset="UTF-8">
-<title>admin_qna_list.jsp</title>
+<title>공지사항</title>
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.board_list_wrap {
+	padding: 50px;
+}
+
+.board_list_head, .board_list_body .item {
+	font-size: 0;
+	padding : 10px 0;
+}
+
+.board_list_head {
+	border-top: 3px solid black;
+	border-bottom: 1px solid #ccc;
+}
+
+.board_list_body .item {
+	border-bottom: 1px solid #ccc;
+}
+
+.board_list_head>div, .board_list_body .item>div {
+	display: inline-block;
+	text-align: center;
+	font-size: 14px;
+}
+
+.board_list_head>div{
+	font-weight: 600;
+}
+
+/* .board_list .num { */
+
+.board_list .qna_type{
+	width : 10%;
+}
+.board_list .title {
+	width : 55%;
+}
+
+.board_list_body div.title {
+	text-align: left;
+}
+
+.board_list_body div.title a:hover {
+	text-decoration: underline;
+}
+
+.board_list .writer {
+	width : 10%;
+}
+.board_list .date {
+	width : 15%;
+}
+
+
+/*  paging  */
+
+  .paging  {  
+  	margin-top: 30px;  
+   	text-align: center;   
+  	margin-left: 10px;
+  }  
+
+
+  .paging input:not(.btn){ 
+    width: 30px;  
+   	height: 30px;   
+   	background-repeat:no-repeat; 
+   	border-radius:100px;  
+   	border-style: none;  
+    overflow: hidden;   
+    font-size: 13px;
+    font-weight: bold;
+  } 
+  
+  .paging input:not(.btn):hover{
+  	background-color: #999;
+  } 
+  
+  .paging a:hover{
+  	text-decoration: underline;
+  }
+
+/* 검색 창 */
+
+
+.ssearch {
+ 	position:relative; 
+ 	float: right; 
+ 	margin-right: 50px; 
+ 	margin-top: 4px; 
+}
+
+.hh{
+	position:relative; 
+ 	float: left; 
+ 	margin-left: 90px; 
+ 	margin-top: 4px;
+	color:#17191d;
+ 	
+}
+select {
+	width:65px;
+	height :30px;
+	font-size: 13px;
+	color:#999;
+	border:2px solid #bbb;
+ 	border-radius:3px; 
+}
+
+
+input[type=text] { 
+ 	width:180px; 
+ 	border:1px solid #bbb; 
+ 	border-radius: 3px; 
+ 	padding: 8px 12px;  	
+ 	font-size: 14px; 
+ } 
+#search_btn{
+	font-size: 13px;
+ 	padding: 6px 7px; 
+	background-color: black;
+	color: white;
+	border : 2px solid black;
+	border-radius: 25px; 
+ 	text-transform: uppercase; 
+ 	letter-spacing:1px;
+  	font-family: sans-serif;  
+	transition : all 0.4s;
+}
+
+#search_btn:focus{
+	outline: none;
+}
+
+#search_btn:hover{
+	background-color: white;
+	color:black;
+}
+
+.btn{
+ 	background-image: url(../images/2199097_edit_draw_pen_pencil_write_icon.png); 
+	background-size: cover;
+	float: right; 
+	width: 40px;  
+   	height: 40px;   
+   	background-repeat:no-repeat;
+   	border:0;
+   	border-style: none; 
+   	background-color: white;
+   	margin:-10px;
+}
+
+</style>
+
+
 </head>
 <div>
 	<jsp:include page="../HeaderFooter/top.jsp" />
 </div>
-<body>
-<%-- <input type ="hidden" name="qna_idx" value="<%=qna.getQna_idx()%>"> --%>
+<!-- 헤더 -->
+   <div>
+      <jsp:include page="../admin_css/sidebar.jsp"/>
+   </div>
+
 
 	<c:set var="pageNum" value="${pageInfo.getPageNum() }" />
 	<c:set var="maxPage" value="${pageInfo.getMaxPage() }" />
@@ -24,76 +188,68 @@
 	<c:set var="endPage" value="${pageInfo.getEndPage() }" />
 	<c:set var="listCount" value="${pageInfo.getListCount() }" />
 	
-	<nav id="left_menu">
-		<ul>
-			<li><a href="AdminNoticeList.admin">Notice</a></li>
-			<li><a href="admin_product.jsp">product</a></li>
-			<li><a href="admin_member.jsp">member</a></li>
-			<li><a href="AdminQNAList.admin">qna</a></li>
-			<li><a href="AdminReportList.admin">report</a></li>
-		</ul>
-	</nav>
 	<hr>
-	<article>
-		<h1>admin_qna_list</h1>
-		<table id="qna">
-			<tr>
-<!-- 				<th class="qna_no">No.</th> -->
-				<th class="qna_type">Classify</th>
-				<th class="qna_title">Title</th>
-				<th class="qna_write">Write</th>
-				<th class="qna_date">Date</th>
-				<th class="qna_status">status</th>
+	<div class ="body">
+	<div class ="search">
+		<div class ="hh"><h1>QNA</h1></div>
+		<div class="ssearch">
+		<form action="AdminQNASearch.admin" method="get">
+			<select name="searchType">
+				<option value="subject">제목</option>
+				<option value="name">작성자</option>
+			</select> 
+			<input type="text" name="search" placeholder="here" > 
+			<input type="submit" value="Search" id="search_btn" >
+		</form></div>
+	</div>
+		
+		
+		<div class="board_list_wrap">
+		
+			<div class="board_list">
+				<div class="board_list_head">
+				<div class="qna_type">Classify</div>
+				<div class="title">Title</div>
+				<div class="write">Write</div>
+				<div class="date">Date</div>
+				<div class="qna_status">status</div>
 
-			</tr>
-				
-			<h1>~~~ qna 리스트 좌라락~~~</h1>
+		</div>
 			<c:if test="${not empty qnaList && pageInfo.listCount > 0}">
 				<c:forEach var="qna" items="${qnaList}">
 
-					<tr>
+					
 <%-- 						<td>${qna.getQna_idx() }</td> --%>
 <%-- 						<td>${qna.getNum() }</td> --%>
-						<td>
-								${qna.qna_type }
-						</td>
-						<td id="subject"><a href="AdminQNAView.admin?qna_idx=${qna.getQna_idx() }&page=${pageNum}">${qna.getQna_subject() }</a></td>
+						<div class="board_list_body">
+							<div class="item">
+								<div class="qna_type">${qna.qna_type }</div>
+						<div class="title"><a href="AdminQNAView.admin?qna_idx=${qna.getQna_idx() }&page=${pageNum}">${qna.getQna_subject() }</a></div>
 
-						<td>${qna.getMember_id() }</td>
+						<div class="write">${qna.getMember_id() }</div>
 
-						<td>${qna.getQna_date() }</td>
-						<td>${qna.getQna_status() }</td>
-					</tr>
+						<div class="date">${qna.getQna_date() }</div>
+						<div class="qna_status">${qna.getQna_status() }</div>
+					</div> <!-- 아이템 디브 -->
+						</div> <!-- 보드리스트 바디 디브 -->
 				</c:forEach>
 			</c:if>
-		</table>
-		<div id="table_search">
-			<input type="button" value="글쓰기" class="btn"
-				onclick="location.href='AdminQNAWriteForm.admin'">
+			
+			</div><!-- 보드리스트 디브 -->
+			
 
-		</div>
-	</article>
 
-	<section id="pageList">
-		<!-- 
-		현재 페이지 번호(pageNum)가 1보다 클 경우에만 Prev 링크 동작
-		=> 클릭 시 notice.jsp 로 이동하면서 
-		   현재 페이지 번호(pageNum) - 1 값을 page 파라미터로 전달
-		-->
+	<div class ="paging">
 		<c:choose>
 			<c:when test="${pageNum > 1 }">
-				<input type="button" value="이전"
-					onclick="location.href='AdminQNAList.admin?page=${pageNum - 1}'">
+				<input type="button" value=" < " onclick="location.href='AdminQNAList.admin?page=${pageNum - 1}'">
 			</c:when>
 			<c:otherwise>
 
-				<input type="button" value="이전">
+				<input type="button" value=" < ">
 			</c:otherwise>
 		</c:choose>
-		<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
-			<!-- step="" 은 1씩 증가해서 생략 -->
-			<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
 			<c:choose>
 				<c:when test="${pageNum eq i }">
 				${i }
@@ -104,32 +260,21 @@
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-		<!-- 
-		현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 다음 링크 동작
-		-->
 		<c:choose>
 			<c:when test="${pageNum < maxPage}">
-				<input type="button" value="다음"
+				<input type="button" value=" > "
 					onclick="location.href='AdminQNAList.admin?page=${pageNum + 1}'">
 			</c:when>
 			<c:otherwise>
 
-				<input type="button" value="다음">&nbsp;
+				<input type="button" value=" > ">&nbsp;
 			</c:otherwise>
 		</c:choose>
-	</section>
-
-
-	<div id="table_search">
-		<form action="AdminQNASearch.admin" method="get">
-			<select name="searchType">
-				<option value="subject">제목</option>
-				<option value="name">작성자</option>
-			</select> <input type="text" name="search" class="input_box"> <input
-				type="submit" value="Search" class="btn">
-		</form>
-
-	</div>
+		
+		<input type="button" value="" class="btn" onclick="location.href='AdminQNAWriteForm.admin'">
+</div> <!-- 페이지디브 -->
+</div><!--  리스트랩 디브 -->
+	</div> <!-- 바디 디브 -->
 
 
 

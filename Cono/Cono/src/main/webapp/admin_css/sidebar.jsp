@@ -82,9 +82,9 @@ body{
 	   <a href="../admin_center/main.jsp">대시보드</a>
 	   <a href="AdminDealList.admin">거래관리</a>
 	   <a href="AdminMemberList.admin">회원관리</a>
-	   <a href="">1:1 문의</a>
-	   <a href="">공지관리</a>
-	   <a href="">신고관리</a>
+	   <a href="AdminQNAList.admin">1:1 문의</a>
+	   <a href="AdminNoticeList.admin">공지관리</a>
+	   <a href="AdminReportList.admin">신고관리</a>
 	</div>
 	
 <!-- 네비게이션	 -->

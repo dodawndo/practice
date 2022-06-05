@@ -231,11 +231,11 @@ input[type=text] {
 								</a></div>
 								<div class="writer">${notice.getAdmin_id() }</div>
 								<div class="date">${notice.getNotice_date() }</div>
-							</div>
-						</div>
+							</div><!-- 아이템 디브 -->
+						</div><!-- 보드리스트 바디 디브 -->
 					</c:forEach>
 				</c:if>
-			</div>
+			</div><!-- 보드리스트 디브 -->
 			
 		
 
@@ -270,7 +270,7 @@ input[type=text] {
 		</c:choose>
 		<input type="button" class="btn" onclick="location.href='AdminWriteForm.admin'" >
 		</div>
-		</div>  <!-- 리스트탭 디브 -->
+		</div>  <!-- 리스트랩 디브 -->
 	
 </div>
 	<hr>

@@ -2,57 +2,129 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-// request 객체에 저장된 BoardDTO 객체("article") 가져오기
 AdminQNADTO qna = (AdminQNADTO)request.getAttribute("qna");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>QNA 답변 폼</title>
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+ #btn{
+ 	font-size: 13px;
+ 	font-weight:bold;
+ 	padding: 6px 7px;  
+	background-color: white;
+	color: #9fa1a7;
+	border : 2px solid #9fa1a7;
+	border-radius: 2px; 
+ 	text-transform: uppercase; 
+ 	letter-spacing:1px;
+  	font-family: sans-serif;  
+	transition : all 0.4s;
+}
+
+#btn:focus{
+	outline: none;
+}
+
+#btn:hover{
+	background-color: #9fa1a7;
+	color:white;
+}
+
+.hh{
+	position:relative; 
+ 	float: center; 
+ 	margin-lefCt: 60px; 
+ 	margin-top: 4px;
+ 	margin-bottom: 10px;
+	color:#17191d;;
+	text-align: center;
+ 	
+}
+
+
+
+ 
+ .admin_id, .subject, .content{ 
+ 	text-align: center;
+ } 
+
+.buttonArea{
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 25px;
+}
+#textBox {
+	width: 300px;
+	height: 30px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 3px solid black;
+	margin-top: 30px;
+	margin-bottom: 10px;
+ 	text-align: center; 
+ 	
+/* 	justify-content : center */
+}
+
+#qna_content{
+	border: 3px solid black;
+	margin-top: 30px;
+ 	text-align: center; 
+	padding-top: 15px;
+}
+
+</style>
 </head>
 <body>
 	<div>
-		<jsp:include page="../HeaderFooter/top.jsp"/>
+		<jsp:include page="../HeaderFooter/top.jsp" />
 	</div>
-
-	<!-- 게시판 답변 -->
-	<section id="replyForm">
-		<h1>게시판 답변</h1>
+	<!-- 헤더 -->
+   <div>
+      <jsp:include page="../admin_css/sidebar.jsp"/>
+   </div>
+   
+   
+	<div class ="body">
+			<div class="hh"><h1>Qna Reply </h1></div>
 		<form action="AdminQNAReplyPro.admin" name="qnaReplyForm" method = "post" >
+		
 		<input type ="hidden" name="qna_idx" value="<%=qna.getQna_idx()%>">
 		<input type ="hidden" name="page" value="<%=request.getParameter("page")%>">
 		<input type ="hidden" name="qna_re_ref" value="<%=qna.getQna_re_ref()%>">
 		<input type ="hidden" name="qna_re_lev" value="<%=qna.getQna_re_lev()%>">
 		<input type ="hidden" name="qna_re_seq" value="<%=qna.getQna_re_seq()%>">
-			<table>
-				<tr>
-					<td class="td_left"><label for="member_id">관리자</label></td>
-					<td class="td_right"><input type="text" name="member_id"  required="required" /></td>
-				</tr>
-				<!-- 답글 작성 시 원본글의 제목, 내용은 표시 -->
-				<tr>
-					<td class="td_left"><label for="qna_subject">제목</label></td>
-					<td class="td_right"><input type="text" name="qna_subject" value="Re:<%=qna.getQna_subject() %>"required="required" /></td>
-				</tr>
-				<tr>
-					<td class="td_left"><label for="qna_content">내용</label></td>
-					<td class="td_right">
-						<textarea id="qna_content" name="qna_content" cols="40" rows="15" required="required">
+		
+		
+		
+			<div class = "admin_id"><input type="text" id="textBox"  name="member_id"  required="required" placeholder="관리자 이름을 입력해주세요." /></div>
+			<div class = "subject"><input type="text" id="textBox"  name="qna_subject" value="Re:<%=qna.getQna_subject() %>"required="required" /></div>
+			<div class = "content"><textarea rows="30" cols="100"  id="qna_content" required="required">
+			
 						----- 원본 글 내용 ------
 						<%=qna.getQna_content() %>
-						</textarea>
-					</td>
-				</tr>
-				
-			</table>
-			<section id="commandCell">
-				<input type="submit" value="답글등록">&nbsp;&nbsp;
-				<input type="reset" value="다시쓰기">&nbsp;&nbsp;
-				<input type ="button" value ="취소" onclick ="history.back()">  
-			</section>
-		</form>
-	</section>
+						</textarea></div>
+			<div class = "buttonArea">
+				<input type="submit" value="답글등록" id ="btn">&nbsp;&nbsp;
+				<input type="reset" value="다시쓰기" id ="btn">&nbsp;&nbsp;
+				<input type ="button" value ="취소" onclick ="history.back()" id ="btn">  
+			</div>
+				</form>
+				</div>
 	
 	<div>
 		<jsp:include page="../HeaderFooter/bottom.jsp"/>
