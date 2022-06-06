@@ -9,41 +9,157 @@ String sId = (String) session.getAttribute("sId");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Report 상세페이지</title>
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.board_list_wrap {
+	padding: 50px;
+}
+
+.board_list_head, .board_list_body {
+	font-size: 100%;
+	margin-bottom: 20px;
+	/*   	padding : 10px 0; */
+}
+
+.board_list_head {
+	border-top: 3px solid black;
+	border-bottom: 1px solid #ccc;
+	height: 100px;
+	position: relative;
+	padding: 14px;
+	color: #363940;
+}
+
+.board_list_body {
+	border-bottom: 1px solid #ccc;
+	padding: 14px 14px 11px 20px;
+	color: #363940;
+}
+
+h1 {
+	position: relative;
+	float: left;
+	margin-left: 60px;
+	margin-top: 4px;
+	margin-bottom: 10px;
+	color: #17191d;;
+}
+
+.title {
+	width: 50%;
+	float: left;
+	height: 70px;
+	font-size: 25px;
+	/*  	padding:14px 0 11px 20px; */
+	font-weight: 600;
+	line-height: 50px;
+	/* 	padding-left: 10px; */
+}
+
+.report_type{
+	width: 50%;
+	height: 70px;
+	float: right;
+	font-size: 14px;
+	font-weight: 200;
+	color: #737881;
+	line-height: 60px;
+	text-align: right;
+}
+
+
+.writer {
+	width: 50%;
+	height: 30px;
+	float: right;
+	font-size: 14px;
+	font-weight: 200;
+	color: #737881;
+	line-height: 60px;
+	text-align: right;
+}
+
+.date {
+	width: 50%;
+	height: 30px;
+	float: right;
+	font-size: 14px;
+	font-weight: 200;
+	color: #737881;
+	line-height: 60px;
+	text-align: left;
+}
+
+#btn {
+	font-size: 13px;
+	font-weight: bold;
+	padding: 6px 7px;
+	background-color: white;
+	color: #9fa1a7;
+	border: 2px solid #9fa1a7;
+	border-radius: 2px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-family: sans-serif;
+	transition: all 0.4s;
+}
+
+#btn:focus {
+	outline: none;
+}
+
+#btn:hover {
+	background-color: #9fa1a7;
+	color: white;
+}
+
+.btnArea {
+	float: right;
+}
+</style>
 </head>
 <body>
+	<!-- 헤더 -->
 	<div>
-		<jsp:include page="../HeaderFooter/top.jsp" />
+		<jsp:include page="../admin_css/sidebar.jsp" />
 	</div>
 
-	<section id="articleForm">
-		<h2>report 글 상세내용 보기</h2>
-		<section id="basicInfoArea">
-			<table border="1">
-				
-					<tr>
-						<td>${report.report_idx }</td>
 
-							<td>
-								${report.report_type }
-							</td>
-					<th width="70">제 목</th>
-					<td colspan="3">${report.report_subject }</td>
-				</tr>
-				<tr>
-					<th width="70">작성자</th>
-					<td>${sId }</td>
-					<th width="70">작성일</th>
-					<td>${report.report_date }</td>
-				</tr>
-			</table>
-		</section>
-		<section id="articleContentArea">${report.report_content}</section>
-		
-		<input type="button" value="목록" onclick="location.href='AdminReportList.admin'"> 
-		<input type="button" value="수정" class="btn" onclick="location.href='AdminReportModifyForm.admin?report_idx=${report.getReport_idx() }&page=${param.page }'"> 
-	</section>
+	<div class="body">
+		<h1>Report</h1>
+		<div class="board_list_wrap">
+			<div class="board_list_head">
+						<div class="num">${report.report_idx }</div>
 
+							<div class="report_type">${report.report_type }</div>
+							<div class="title">${report.report_subject }</div>
+				<div class="writer">${sId }</div>
+					<div class="date">${report.report_date }</div>
+				</div>
+			<div class="board_list_body">
+				<div class="content">${report.report_content}내용내용내용내용내용내용내용내용내용
+		내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+		내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+		내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+		내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
+
+			</div>
+			<div class="btnArea">
+		<input type="button" value="목록" id="btn" onclick="location.href='AdminReportList.admin'"> 
+		<input type="button" value="수정" id="btn" class="btn" onclick="location.href='AdminReportModifyForm.admin?report_idx=${report.getReport_idx() }&page=${param.page }'"> 
+	</div>
+</div>
+</div>
 	<div>
 		<jsp:include page="../HeaderFooter/bottom.jsp" />
 	</div>
