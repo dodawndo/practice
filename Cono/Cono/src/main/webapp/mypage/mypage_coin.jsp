@@ -22,62 +22,87 @@
  	
 }
 
-.cashListWrap {
-/*      padding: 50px;  */
-/*     float:center; */
-	margin-bottom:25px;
-    border:3px solid #a4e7ff;
-	width:100%;
-    
-}
 
 
 /* 라디오버튼 페이결제 */
 
 input[type=radio]{
  	accent-color: #a4e7ff; 
-	font-size: 25px; 
+	font-size: 35px; 
 	border: 0px;
-
-    height: 15px; 
+	width:100%;
+     height: 0.5em; 
 }
 
 .radioBtn{
-	font-size: 15px;
+	font-size: 20px;
 }
 
 
 
 /* 페이 리스트 */
 
+.cashListWrap {
+	width:100%;
+    
+}
 .coin_total{
 	width:100%;
-	font: 15px #17191d; 
-	margin-bottom:20px;
-	padding:8px;
+	text-align:right;
+	font-size: 20px;
+	color: #17191d; 
+ 	margin-bottom:10px; 
+	
 }
 
-.cashTable{
+.cashTable {
+/* 	border-top:3px solid #a4e7ff; */
+	border-bottom: 3px solid #a4e7ff;
 	width:100%;
+	font-size: 20px;
+	padding-top:15px;
+	padding-bottom:15px;
+	
+}
+
+th {
+	border:3px solid #a4e7ff;
+	padding : 10px;
 }
 th .num {
+
 	width : 10%;
+	font-size: 20px;
+	color:#17191d; 
 }
 th .coin_add {
 	width : 25%;
+	font-size: 20px;
+	color:#17191d; 
 }
 th .coin_use {
 	width : 25%;
+	font-size: 20px;
+	color:#17191d; 
 }
 
  th .td_coin_total{
 	width : 25%;
+	font-size: 20px;
+	color:#17191d; 
 }
 th .date {
 	width : 15%;
+	font-size: 20px;
+	color:#17191d; 
 }
 
-
+td {
+	padding : 10px;
+	text-align: center;
+	font-size:18px;
+	color:#17191d;
+}
 
 /* 버튼 */
 .btnArea {
@@ -89,9 +114,9 @@ th .date {
 
 .btn{
 
- 	font-size: 13px;
+ 	font-size: 18px;
  	font-weight:bold;
- 	padding: 4px 7px; 
+ 	padding: 6px 17px; 
 	background-color: #a4e7ff;
 	color: white;
 	border : 2px solid #a4e7ff;
@@ -152,8 +177,8 @@ th .date {
       <div id="payCheck" class ="payCheck" align="center">
       <form action="payment" method="post" >
       <table class="payTable">
-	      <tr><td class ="radioBtn"><input type="radio" name="payment_value" value="10000">  10,000원&nbsp;&nbsp;&nbsp;</td><td class ="radioBtn"><input type="radio" name="payment_value" value="30000">	30,000원&nbsp;</td></tr>
-	      <tr><td class ="radioBtn"><input type="radio" name="payment_value" value="50000">  50,000원&nbsp;&nbsp;&nbsp;</td><td class ="radioBtn"><input type="radio" name="payment_value" value="100000">	 100,000원&nbsp;</td></tr>
+	      <tr><td class ="radioBtn"><input type="radio" name="payment_value" value="10000">  &nbsp;&nbsp;10,000원&nbsp;&nbsp;</td><td class ="radioBtn"><input type="radio" name="payment_value" value="30000">	&nbsp;&nbsp;30,000원&nbsp;&nbsp;</td></tr>
+	      <tr><td class ="radioBtn"><input type="radio" name="payment_value" value="50000">  &nbsp;&nbsp;50,000원&nbsp;&nbsp;</td><td class ="radioBtn"><input type="radio" name="payment_value" value="100000">	 &nbsp;&nbsp;100,000원&nbsp;&nbsp;</td></tr>
         </table>
          <div class="btnArea"><input type="submit" value="결제하기" class="btn"></div>
       </form>
@@ -161,28 +186,30 @@ th .date {
       
 <!--    </section> -->
       
-   <div class="cashListWrap" align="center">
 		
       
-				<div class="coin_total">사용가능한 코인 : ${coin_total}</div>
-				<div class="cashItem">
+				<div class="coin_total">사용가능한 코인 : ${coin_total}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+   		<div class="cashListWrap" align="center">
 			<table class="cashTable" >
 			
 					<tr>
 						<th class="num">No.</th><th class="coin_add">적립내역</th><th class="coin_use">사용내역</th><th class="td_coin_total">보유 코인</th><th class="date">날짜</th>
 					<tr>
 						
-						 <c:forEach var="coinVO" items="${coin }">
-						<td class="num">${coinVO.coin_idx}</td>
-						<td class="coin_add">${coinVO.coin_add }</td>
-						<td class="coin_use">${coinVO.coin_use }</td>
-						<td class="td_coin_total">${coinVO.coin_total }</td>
-						<td class="date">${coinVO.coin_date }</td>
-					
-      					</c:forEach>
+<%-- 						 <c:forEach var="coinVO" items="${coin }"> --%>
+<%-- 							<td class="num">${coinVO.coin_idx} 숫 자 </td> --%>
+<%-- 							<td class="coin_add">${coinVO.coin_add }  숫 자 </td> --%>
+<%-- 							<td class="coin_use">${coinVO.coin_use }  숫 자 </td> --%>
+<%-- 							<td class="td_coin_total">${coinVO.coin_total }  숫 자  </td> --%>
+<%-- 							<td class="date">${coinVO.coin_date }  숫 자  </td> --%>
+<%--       					</c:forEach> --%>
+<td class="num">${coinVO.coin_idx} 숫 자 </td>
+<td class="coin_add">${coinVO.coin_add }  숫 자 </td>
+<td class="coin_use">${coinVO.coin_use }  숫 자 </td>
+<td class="td_coin_total">${coinVO.coin_total }  숫 자  </td>
+<td class="date">${coinVO.coin_date }  숫 자  </td>
       			</tr>
 	   </table>
-      	</div> <!-- cashItem 디브 -->
       	
       	</div> <!-- cashListWrap 디브 -->
 </body>
