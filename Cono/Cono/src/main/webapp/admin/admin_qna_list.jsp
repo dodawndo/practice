@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>qna</title>
 <style type="text/css">
 * {
 	margin: 0;
@@ -46,7 +46,9 @@ a {
 	font-weight: 600;
 }
 
-/* .board_list .num { */
+ .board_list .num { 
+  width : 5%;
+ }
 
 .board_list .qna_type{
 	width : 10%;
@@ -208,6 +210,7 @@ input[type=text] {
 		
 			<div class="board_list">
 				<div class="board_list_head">
+				<div class ="num"> no.</div>
 				<div class="qna_type">Classify</div>
 				<div class="title">Title</div>
 				<div class="write">Write</div>
@@ -220,9 +223,9 @@ input[type=text] {
 
 					
 <%-- 						<td>${qna.getQna_idx() }</td> --%>
-<%-- 						<td>${qna.getNum() }</td> --%>
 						<div class="board_list_body">
 							<div class="item">
+						<div class = "num">${qna.getNum() }</div>
 								<div class="qna_type">${qna.qna_type }</div>
 						<div class="title"><a href="AdminQNAView.admin?qna_idx=${qna.getQna_idx() }&page=${pageNum}">${qna.getQna_subject() }</a></div>
 

@@ -61,7 +61,7 @@ a {
 }
 
 select {
-	width:65px;
+	width:100px;
 	height :30px;
 	font-size: 13px;
 	color:#999;
@@ -126,7 +126,7 @@ select {
 					<div class = "content"><textarea rows="30" cols="100"  id="report_content" name="report_content" required="required" placeholder="신고 내용을 입력해주세요. "></textarea></div>
 					
 
-				<div class = "buttonArea"><input type="submit" value="글쓰기" class="btn"></div>
+				<div class = "buttonArea"><input type="submit" value="글쓰기" id="btn"></div>
 				
 			</form>
 			</div>

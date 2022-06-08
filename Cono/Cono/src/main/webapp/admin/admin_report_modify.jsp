@@ -61,7 +61,7 @@ a {
 }
 
 select {
-	width:65px;
+	width:100px;
 	height :30px;
 	font-size: 13px;
 	color:#999;
@@ -125,8 +125,8 @@ select {
 						<option value="게시글신고">게시글신고</option>
 						<option value="사용자신고">사용자신고</option>
 					</select></div>
-					<div class = "admin_id"><input type="text" name="member_id" value = "<%=sId %>" readonly="readonly" required="required" placeholder="이름을 입력해주세요. "></div>
-					<div class = "subject"><input type="text" name="report_subject" required="required" placeholder="제목을 입력해주세요. "></div>
+					<div class = "admin_id"><input type="text" id="textBox" name="member_id" value = "<%=sId %>" readonly="readonly" required="required" placeholder="이름을 입력해주세요. "></div>
+					<div class = "subject"><input type="text" id="textBox" name="report_subject" required="required" placeholder="제목을 입력해주세요. "></div>
 					<div class = "content"><textarea textarea rows="30" cols="100"  id="report_content" name="report_content" required="required" placeholder="신고 내용을 입력해주세요. "></textarea></div>
 					
 					<div class = "buttonArea"><input type="submit" value="수정" id="btn"></div>

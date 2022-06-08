@@ -139,7 +139,7 @@ h1 {
 		<h1>Report</h1>
 		<div class="board_list_wrap">
 			<div class="board_list_head">
-						<div class="num">${report.report_idx }</div>
+<%-- 						<div class="num">${report.report_idx }</div> --%>
 
 							<div class="report_type">${report.report_type }</div>
 							<div class="title">${report.report_subject }</div>

@@ -332,20 +332,24 @@ public class AdminDAO {
 		try {
 //			String sql = "SELECT * FROM qna ORDER BY qna_re_ref+0 DESC LIMIT ?,?";
 //			String sql = "SELECT * FROM qna ORDER BY qna_idx+0 DESC LIMIT ?,?";
-			String sql = "SELECT @rownum:=@rownum+1 AS num" + ", A.qna_idx" + ", A.member_id" + ", A.qna_type"
+			String sql = "SELECT @rownum:=@rownum-1 AS num" + ", A.qna_idx" + ", A.member_id" + ", A.qna_type"
 					+ ", A.qna_subject" + ", A.qna_content" + ", A.qna_date" + ", A.qna_status" + ", A.qna_re_ref"
-					+ ", A.qna_re_lev" + ", A.qna_re_seq" + ", A.qna_status"+ " FROM qna A" + ", (SELECT @rownum:=0) TMP"
+					+ ", A.qna_re_lev" + ", A.qna_re_seq" + ", A.qna_status"
+					+ " FROM qna A" + ", (SELECT @rownum:=(SELECT COUNT(*)+1 FROM qna)) TMP"
 					+ " ORDER BY qna_re_ref+0 DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, listLimit);
 
+			System.out.println(pstmt);
+			
 			rs = pstmt.executeQuery();
 
 			qnaList = new ArrayList<AdminQNADTO>();
 
 			while (rs.next()) {
 				AdminQNADTO qna = new AdminQNADTO();
+				qna.setNum((int)Double.parseDouble(rs.getString("num")));
 				qna.setQna_idx(rs.getString("qna_idx"));
 				qna.setMember_id(rs.getString("member_id"));
 				qna.setQna_type(rs.getString("qna_type"));
@@ -360,6 +364,7 @@ public class AdminDAO {
 
 			}
 
+			System.out.println(qnaList);
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 발생! - selectNoticeList()");
 			e.printStackTrace();
