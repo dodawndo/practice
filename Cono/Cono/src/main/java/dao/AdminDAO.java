@@ -74,7 +74,7 @@ public class AdminDAO {
 		int startRow = (pageNum - 1) * listLimit;
 
 		try {
-			String sql = "SELECT * FROM notice  ORDER BY notice_idx+0 DESC LIMIT ?,?";
+			String sql = "SELECT * FROM notice ORDER BY notice_idx+0 DESC LIMIT ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, listLimit);
